@@ -1,6 +1,6 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
-from langchain_core.prompts import PromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 import streamlit as st
 
 import os
@@ -23,32 +23,44 @@ with st.sidebar:
     st.header("Configuración")
     temperature = st.slider("Temperatura", 0.0, 1.0, 0.5, 0.1)
     model_name = st.selectbox("Modelo", ['gemini-3-flash-preview', 'gemini-3.1-flash-lite-preview'])
-
-    #chat_model = ChatGoogleGenerativeAI(model='gemini-3.1-flash-lite-preview', temperature=0.5, api_key=api_key_google)
-    #chat_model = ChatGoogleGenerativeAI(model='gemini-3-flash-preview', temperature=0.5, api_key=api_key_google)
-    chat_model = ChatGoogleGenerativeAI(
-        model=model_name, 
-        temperature=temperature, 
-        api_key=api_key_google
+    # ¡Nuevo! Personalidad configurable
+    personalidad = st.selectbox(
+        "Personalidad del Asistente",
+        [
+            "Útil y amigable",
+            "Profesional y formal", 
+            "Casual y relajado",
+            "Experto técnico",
+            "Creativo y divertido"
+        ]
     )
+
+    chat_model = ChatGoogleGenerativeAI(model=model_name, temperature=temperature, api_key=api_key_google)
+
+    # Template dinámico basado en personalidad
+    system_message = {
+        "Útil y amigable": "Eres un asistente útil y amigable llamado ChatBot Pro. Responde de manera clara y concisa.",
+        "Profesional y formal": "Eres un asistente profesional y formal. Proporciona respuestas precisas y bien estructuradas.",
+        "Casual y relajado": "Eres un asistente casual y relajado. Habla de forma natural y amigable, como un buen amigo.",
+        "Experto técnico": "Eres un asistente experto técnico. Proporciona respuestas detalladas con precisión técnica.",
+        "Creativo y divertido": "Eres un asistente creativo y divertido. Usa analogías, ejemplos creativos y mantén un tono alegre."
+    }
+
 
 # Inicializar el historial de mensajes
 if "mensajes" not in st.session_state:
     st.session_state.mensajes = []
 
 # Crear el template de prompt con comportamiento especifico
-prompt_template = PromptTemplate(
-    input_variables=["mensaje", "historial"],
-    template="""Eres un asistente útil y amigable llamado ChatBot Pro. 
- 
-Historial de conversación:
-{historial}
- 
-Responde de manera clara y concisa a la siguiente pregunta: {mensaje}"""
-)
+chat_prompt = ChatPromptTemplate([
+    # Mensaje del sistema - Define la personalidad una sola vez
+    ("system", system_message[personalidad]),
+    # El historial y mensaje actual - se manejan como texto formateado
+    ("human", "Historial de conversación:\n{historial}\n\nResponde de manera clara y concisa a la siguiente pregunta: {mensaje}")
+])
 
 # Crear cadena usando LCEL (LangChain Expression Language)
-cadena = prompt_template | chat_model
+cadena = chat_prompt | chat_model
 
 # Mostrar mensajes previos en la interfaz
 for msg in st.session_state.mensajes:
@@ -96,5 +108,3 @@ if pregunta:
     except Exception as e:
         st.error(f"Error al generar respuesta {str(e)}")
         st.info("Verifica que tu API de Google esté configurada correctamente")
-
-    #st.session_state.mensajes.append(respuesta)
