@@ -1,3 +1,5 @@
 .DS_store
 /venv
 .env
+credentials.json
+token.json
