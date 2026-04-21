@@ -3,3 +3,4 @@
 langchain
 langchain-google-genai
 streamlit
+pyPDF2
