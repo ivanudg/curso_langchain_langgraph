@@ -19,6 +19,8 @@ texto2 = "Paris es un nombre común para mascotas"
 vec1 = embeddings.embed_query(texto1)
 vec2 = embeddings.embed_query(texto2)
 
+print(vec1)
+
 print(f"Dimensión de los vectores: {len(vec1)}")
 
 cos_sim = np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
