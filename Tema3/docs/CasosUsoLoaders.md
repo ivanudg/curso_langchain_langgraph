@@ -40,3 +40,26 @@ Casos de uso ideales:
 
 ## 6. CSVLoader - Datos Tabulares
 Convierte datos estructurados en documentos procesables.
+Casos de uso ideales:
+* Análisis de datos de ventas
+* Logs de sistema
+* Datos de encuestas
+* Registros de transacciones
+
+## 7. SeleniumURLLoader - JavaScript y Contenido Dinámico
+Para páginas web que requieren renderizado de JavaScript.
+Casos de uso ideales:
+* Single Page Applications (SPAs)
+* Dashboards interactivos
+* Sitios con autenticación
+* Contenido generado por JavaScript
+
+## 8. GitLoader - Repositorios de Código
+Carga archivos directamente desde repositorios Git.
+Casos de uso ideales:
+* Análisis de código fuente
+* Documentación de proyectos
+* Auditorías de repositorios
+* Generación de documentación automática
+
+

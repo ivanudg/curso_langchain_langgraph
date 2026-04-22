@@ -11,6 +11,7 @@ beautifulsoup4
 google-api-python-client 
 google-auth-httplib2 
 google-auth-oauthlib 
-unstructured[md]
+unstructured
 youtube-transcript-api
 pytube
+selenium
