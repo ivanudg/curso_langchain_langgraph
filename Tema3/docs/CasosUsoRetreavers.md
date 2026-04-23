@@ -67,3 +67,27 @@ El ParentDocumentRetriever logra ese equilibrio dividiendo y almacenando pequeñ
 * Embeddings precisos: Los chunks pequeños crean embeddings más representativos
 * Contexto completo: Devuelve documentos padre con contexto suficiente
 * Flexibilidad: Puedes ajustar el tamaño de chunks padre e hijo independientemente
+
+# 5. SelfQueryRetriever: Búsqueda Estructurada Inteligente
+### Más allá de la similitud semántica
+
+SelfQueryRetriever utilizará un LLM para generar una consulta que es potencialmente estructurada, por ejemplo, puede construir filtros para la recuperación además de la selección habitual dirigida por similitud semántica.
+
+>**Implementación** SelfQueryRetriever.py
+
+**Casos de uso**
+* Bases de datos con metadatos ricos
+* Consultas que combinan contenido y filtros
+* Sistemas que requieren búsqueda estructurada automática
+
+# 6. TimeWeightedVectorStoreRetriever: Memoria que Desvanece
+
+### Para información sensible al tiempo
+Este retriever asigna mayor importancia a documentos más recientes, simulando cómo funciona la memoria humana.
+
+> **implementaciión:** TimeWeightedVectorStoreRetriever.py
+
+# 7. Técnicas Avanzadas y Combinaciones
+### Retrieval con Reranking
+>**Implementación:** 7.Técnicas Avanzadas y Combinaciones.py
+>**Implementación:** 7.1Retrieval MMR.py
