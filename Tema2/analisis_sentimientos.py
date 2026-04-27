@@ -12,7 +12,7 @@ api_key_google = os.getenv('GOOGLE_API_KEY')
 llm = ChatGoogleGenerativeAI(
     model='gemini-3.1-flash-lite-preview',
     temperature=0,
-    api_key=api_key_google
+    #api_key=api_key_google
 )
 
 # Limpia la consola

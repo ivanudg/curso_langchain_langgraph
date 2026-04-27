@@ -19,8 +19,8 @@ documentos = loader.load()
 print(f"Se cargaron {len(documentos)} documentos desde el directorio")
 
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
-    chunk_overlap=200
+    chunk_size=5000,
+    chunk_overlap=1000
 )
 docs_split = text_splitter.split_documents(documentos)
 print(f"Se crearon {len(docs_split)} chunks de texto a partir de los documentos.")
@@ -31,7 +31,8 @@ embedding = GoogleGenerativeAIEmbeddings(
     api_key=api_key_google
 )
 
-persist_directory_BD = str(Path( Path.cwd(), 'Tema3', 'chroma_db' ))
+#persist_directory_BD = str(Path( Path.cwd(), 'Tema3', 'chroma_db' ))
+persist_directory_BD = str(Path( Path.cwd(), 'Tema3', 'asistente_legal_RAG', 'DB' ))
 # Chroma.from_documents: Crear la colección y agregar los documentos en un solo paso
 # Chroma: Conectarse a una colección existente (sin cargar docs)
 vectorStore = Chroma.from_documents(
