@@ -4,6 +4,7 @@
 * langchain-chroma
 * langchain-community
 * langchain-google-genai
+* langgraph
 * angchain-google-community 
 * streamlit
 * pyPDF2
